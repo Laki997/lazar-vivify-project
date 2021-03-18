@@ -54,7 +54,7 @@ $posts = getDataFromDatabase($sql, $connection);
           <div class="blog-post">
             <a href="single-post.php?post_id=<?php echo ($post['post_id']) ?>" class="blog-title-color"><?php echo $post['title']; ?></a>
             <p class="blog-post-meta">
-              <?php echo $post['created_at']; ?> by <a href="#"><?php echo $post['ime'] .' ' . $post['prezime']; ?></a>
+              <?php echo $post['created_at']; ?> by <a href="#" class="option-color-single-<?php echo $post['pol']; ?>"><?php echo $post['ime'] .' ' . $post['prezime']; ?></a>
             </p>
 
             <p>

@@ -23,6 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
      getDataToDatabase($sql, $connection);
 
+     
+
    
 
 
@@ -76,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     <label for="exampleInputEmail1">Author</label>
     <select name="author" id="">
     <?php foreach ($authors as $author) { ?>
-    <option value="<?php echo $author['id']; ?>"> 
+    <option class="option-color-<?php echo $author['pol']; ?>" value="<?php echo $author['id']; ?>" > 
     <?php echo $author['ime'] .' ' . $author['prezime']; ?> 
     </option>
     

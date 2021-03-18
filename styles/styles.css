@@ -13,3 +13,21 @@ body {
 .form-group-flex {
   display: flex;
 }
+
+.option-color-M {
+  background-color: blue;
+  color: yellow;
+}
+
+.option-color-Z {
+  background-color: red;
+  color: yellow;
+}
+
+.option-color-single-M {
+  color: blue;
+}
+
+.option-color-single-Z {
+  color: red;
+}
