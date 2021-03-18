@@ -37,31 +37,33 @@
 
                if (isset($_GET['post_id'])){
                  
-                $post_id = $_GET['post_id'];
+                // $post_id = $_GET['post_id'];
                
 
-                  if ($_SERVER['REQUEST_METHOD'] ==='POST'){
-                  $autor = $_POST['autor'];
-                  $tekst = $_POST['tekst'];
+                  // if ($_SERVER['REQUEST_METHOD'] ==='POST'){
+                  
+                //   // $autor = $_POST['autor'];
+                //   // $tekst = $_POST['tekst'];
                  
                   
 
-                  $sqlCom = "INSERT INTO comments (autor, tekst, post_id) values ('$autor','$tekst','$post_id')";
+                //   // $sqlCom = "INSERT INTO comments (autor, tekst, post_id) values ('$autor','$tekst', '$post_id')";
 
-                  getDataToDatabase($sqlCom, $connection);
+                //   // getDataToDatabase($sqlCom, $connection);
 
-                  }
+                //   // }
                   
                 
                
 
-                $sql = "SELECT * from posts where posts.id =  {$_GET['post_id']}";
+                $sql = "SELECT *,  a.ime as ime, a.prezime as prezime from posts p inner join author a on p.author_id = a.id where p.id =  {$_GET['post_id']}";
 
                 $post = getDataFromDatabaseSingleton($sql, $connection);
 
-                $sql2 = "SELECT *  from comments c left join posts p on c.post_id = p.id where c.post_id = {$_GET['post_id']}";
+                $sql2 = "SELECT *, a.ime as autor  from comments c left join author a on c.author_id = a.id where c.post_id = {$_GET['post_id']}";
 
                 $comments = getDataFromDatabase($sql2, $connection);
+
 
               
 
@@ -70,7 +72,7 @@
      
             <a href="" class="blog-title-color"><?php echo $post['title'] ?></a>
             <p class="blog-post-meta">
-              <?php echo $post['created_at']; ?> by <a href="#"><?php echo $post['author']; ?></a>
+              <?php echo $post['created_at']; ?> by <a href="#"><?php echo $post['ime'] .' '. $post['prezime']?></a>
             </p>
             <p>
                 <?php echo $post['body']; ?>
@@ -124,7 +126,7 @@
          
         </div>
         
-        <?php }?>
+        <?php } ?>
                </div>
                <?php include('sidebar.php') ?>
             

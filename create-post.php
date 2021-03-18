@@ -2,6 +2,13 @@
 
 include('db.php');
 
+
+     $sqlAuthors = "SELECT * from author";
+
+     $authors = getDataFromDatabase($sqlAuthors, $connection);
+
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     $title = $_POST['title'];
@@ -12,16 +19,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     
 
 
-    $sql = "INSERT INTO posts (title, body, author, created_at) values ('$title', '$body','$author','$created_at')";
+    $sql = "INSERT INTO posts (title, body, author_id, created_at) values ('$title', '$body','$author','$created_at')";
 
      getDataToDatabase($sql, $connection);
 
+   
 
 
 }
 
-?>
 
+
+?>
 
 
 
@@ -65,14 +74,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
   </div>
     <div class="form-group">
     <label for="exampleInputEmail1">Author</label>
-    <input type="text" name="author" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter author" required>
+    <select name="author" id="">
+    <?php foreach ($authors as $author) { ?>
+    <option value="<?php echo $author['id']; ?>"> 
+    <?php echo $author['ime'] .' ' . $author['prezime']; ?> 
+    </option>
     
+   <?php   } ?>
+    </select>
+    
+    
+  
+          
+   
+   
+
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Created At</label>
     <input type="text" name="created_at" class="form-control" id="exampleInputPassword1" placeholder="Enter date" required>
   </div>
   <div class="form-group form-check">
+  
     
     
   </div>
@@ -81,6 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 </form>
 
   </div>
+ 
 </div>
 
 <?php include('sidebar.php'); ?>
@@ -91,6 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
             
         
 </main>
+
         <!-- /.blog-sidebar -->
     
     <!-- /.container -->
@@ -98,3 +123,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
 <?php include('footer.php'); ?>
   </body>
 </html>
+

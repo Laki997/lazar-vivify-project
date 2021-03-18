@@ -10,3 +10,6 @@ body {
 .blog-title-color:hover {
   color: #b34848;
 }
+.form-group-flex {
+  display: flex;
+}
