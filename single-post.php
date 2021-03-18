@@ -35,25 +35,44 @@
                <?php 
                include('db.php');
 
-               if (isset($_GET['post_id'])){
-                 
-                // $post_id = $_GET['post_id'];
                
 
-                  // if ($_SERVER['REQUEST_METHOD'] ==='POST'){
+              
+
+
+
+               if (isset($_GET['post_id'])){
+
+                 $sqlRandom = "SELECT id from author";
+
+               $id = getDataFromDatabase($sqlRandom, $connection);
+
+               $idRandom = array_rand($id);
+
+               $idRand = $id[$idRandom];
+
+               $post_id = $_GET['post_id'];
+
+        
+                  if ($_SERVER['REQUEST_METHOD'] ==='POST'){
                   
-                //   // $autor = $_POST['autor'];
-                //   // $tekst = $_POST['tekst'];
+                  
+                  $tekst = $_POST['tekst'];
+
+                  $sqlCom = "INSERT INTO comments (author_id, tekst, post_id) values ('$idRand','$tekst', '$post_id')";
+
+                  
+
+                  getDataToDatabase($sqlCom, $connection);
+
+                   
+
                  
+
+
                   
-
-                //   // $sqlCom = "INSERT INTO comments (autor, tekst, post_id) values ('$autor','$tekst', '$post_id')";
-
-                //   // getDataToDatabase($sqlCom, $connection);
-
-                //   // }
                   
-                
+                  }
                
 
                 $sql = "SELECT *,  a.ime as ime, a.prezime as prezime, a.pol as pol from posts p inner join author a on p.author_id = a.id where p.id =  {$_GET['post_id']}";
@@ -64,7 +83,7 @@
 
                 $comments = getDataFromDatabase($sql2, $connection);
 
-
+                  
               
 
              ?>
@@ -87,7 +106,7 @@
                   echo "<div>" . $comment['tekst']. "</div>";
                   echo "<hr>";
                   
-              }?>
+              } ?>
 
 
 
@@ -97,12 +116,14 @@
             <h3>Unesite komentar</h3>
             <hr>
             <br>
+
+              
           <form action="single-post.php" method="POST">
-  <div class="form-group">
+  <!-- <div class="form-group">
     <label for="exampleInputEmail1">Autor</label>
     <input type="text" name="autor" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter autor" required>
     
-  </div>
+  </div> -->
     <div class="form-group">
     <label for="exampleInputEmail1">Tekst</label>
     <textarea name="tekst" rows="5" cols="40" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter tekst" required></textarea>
@@ -126,7 +147,7 @@
          
         </div>
         
-        <?php } ?>
+      <?php }  ?>
                </div>
                <?php include('sidebar.php') ?>
             
