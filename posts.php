@@ -63,7 +63,7 @@ $posts = getDataFromDatabase($sql, $connection);
             <hr />
             
 
-
+          </div>
             <?php } ?>
             
             
@@ -84,8 +84,10 @@ $posts = getDataFromDatabase($sql, $connection);
        
 
         <!-- /.blog-sidebar -->
-      </div>
+      
+     
       <?php include('sidebar.php') ?>
+      
       <!-- /.row -->
     
     </main>

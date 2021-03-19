@@ -35,12 +35,7 @@
                <?php 
                include('db.php');
 
-               
-
-              
-
-
-
+  
                if (isset($_GET['post_id'])){
 
                  $sqlRandom = "SELECT id from author";
@@ -49,7 +44,7 @@
 
                $idRandom = array_rand($id);
 
-               $idRand = $id[$idRandom];
+              //  $idRand = $id[$idRandom];
 
                $post_id = $_GET['post_id'];
 
@@ -59,7 +54,7 @@
                   
                   $tekst = $_POST['tekst'];
 
-                  $sqlCom = "INSERT INTO comments (author_id, tekst, post_id) values ('$idRand','$tekst', '$post_id')";
+                  $sqlCom = "INSERT INTO comments (author_id, tekst, post_id) values ('$idRandom','$tekst', '$post_id')";
 
                   
 
@@ -79,12 +74,12 @@
 
                 $post = getDataFromDatabaseSingleton($sql, $connection);
 
-                $sql2 = "SELECT *, a.ime as autor  from comments c left join author a on c.author_id = a.id where c.post_id = {$_GET['post_id']}";
+                $sql2 = "SELECT *, a.ime as ime, a.prezime as prezime  from comments c left join author a on c.author_id = a.id where c.post_id = {$_GET['post_id']}";
 
                 $comments = getDataFromDatabase($sql2, $connection);
 
-                  
-              
+               
+                
 
              ?>
   
@@ -102,7 +97,7 @@
             <ul>
               <?php foreach($comments as $comment) {  
                    
-                  echo "<li>" . "<strong>" . $comment['autor'].  "</strong>" ."</li>";
+                  echo "<li>" . "<strong>" . $comment['ime'] .' '. $comment['prezime'].  "</strong>" ."</li>";
                   echo "<div>" . $comment['tekst']. "</div>";
                   echo "<hr>";
                   
